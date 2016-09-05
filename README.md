@@ -13,6 +13,27 @@ $ export CPATH="$CUDA_PATH/include/"
 $ export CGO_LDFLAGS="$CUDA_PATH/lib/libcublas.dylib $CUDA_PATH/lib/libcudart.dylib"
 ```
 
+Once your environment is setup, you can use cuBLAS with gonum/blas/blas64 like this:
+
+```go
+import (
+  "github.com/gonum/blas/blas64"
+  "github.com/gonum/blas/native"
+  "github.com/unixpickle/gocublas"
+)
+
+...
+
+func main() {
+  impl, err := gocublas.NewFloat64(native.Implementation{})
+  if err != nil {
+    panic(err)
+  }
+  defer impl.Destroy()
+  blas64.Use(impl)  
+}
+```
+
 # Current status
 
 Currently, I support the following BLAS routines:
