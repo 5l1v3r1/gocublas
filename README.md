@@ -12,3 +12,9 @@ $ export DYLD_LIBRARY_PATH="$CUDA_PATH/lib":$DYLD_LIBRARY_PATH
 $ export CPATH="$CUDA_PATH/include/"
 $ export CGO_LDFLAGS="$CUDA_PATH/lib/libcublas.dylib $CUDA_PATH/lib/libcudart.dylib"
 ```
+
+# Current status
+
+Currently, I support the following BLAS routines:
+
+ * **dgemm:** double-precision matrix multiplication
