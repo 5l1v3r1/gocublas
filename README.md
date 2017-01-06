@@ -39,3 +39,4 @@ func main() {
 Currently, I support the following BLAS routines:
 
  * **dgemm:** double-precision matrix multiplication
+ * **sgemm:** single-precision matrix multiplication
