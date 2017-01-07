@@ -167,6 +167,7 @@ int gocublas_sgemm(void * handle, int transA, int transB, int m, int n, int k,
 import "C"
 import (
 	"errors"
+	"runtime"
 	"unsafe"
 )
 
@@ -207,6 +208,10 @@ func (h *blasHandle) doubleMatMult(transA, transB bool, m, n, k int, alpha float
 	res := C.gocublas_dgemm(h.handlePtr, transAInt, transBInt, C.int(m), C.int(n), C.int(k),
 		C.double(alpha), (*C.double)(&matA[0]), C.int(lda), (*C.double)(&matB[0]),
 		C.int(ldb), C.double(beta), (*C.double)(&matC[0]), C.int(ldc))
+	runtime.KeepAlive(matA)
+	runtime.KeepAlive(matB)
+	runtime.KeepAlive(matC)
+
 	switch res {
 	case 0:
 		return nil
@@ -237,6 +242,10 @@ func (h *blasHandle) singleMatMult(transA, transB bool, m, n, k int, alpha float
 	res := C.gocublas_sgemm(h.handlePtr, transAInt, transBInt, C.int(m), C.int(n), C.int(k),
 		C.float(alpha), (*C.float)(&matA[0]), C.int(lda), (*C.float)(&matB[0]),
 		C.int(ldb), C.float(beta), (*C.float)(&matC[0]), C.int(ldc))
+	runtime.KeepAlive(matA)
+	runtime.KeepAlive(matB)
+	runtime.KeepAlive(matC)
+
 	switch res {
 	case 0:
 		return nil
