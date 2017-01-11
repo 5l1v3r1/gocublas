@@ -1,9 +1,6 @@
 package gocublas
 
 /*
-#cgo CFLAGS: -x objective-c
-#cgo LDFLAGS: -framework Cocoa
-
 #include "cuda.h"
 #include "cuda_runtime_api.h"
 #include "cublas_v2.h"
