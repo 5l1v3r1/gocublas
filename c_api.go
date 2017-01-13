@@ -51,11 +51,13 @@ int gocublas_dgemm(void * handle, int transA, int transB, int m, int n, int k,
         cudaFree(mat3);
         return 2;
     }
-    if (cudaMemcpy(mat3, matC, m*n*sizeof(double), cudaMemcpyHostToDevice) != cudaSuccess) {
-        cudaFree(mat1);
-        cudaFree(mat2);
-        cudaFree(mat3);
-        return 2;
+    if (beta != 0) {
+        if (cudaMemcpy(mat3, matC, m*n*sizeof(double), cudaMemcpyHostToDevice) != cudaSuccess) {
+            cudaFree(mat1);
+            cudaFree(mat2);
+            cudaFree(mat3);
+            return 2;
+        }
     }
     cublasOperation_t trans1, trans2;
     int ld1, ld2;
@@ -121,11 +123,13 @@ int gocublas_sgemm(void * handle, int transA, int transB, int m, int n, int k,
         cudaFree(mat3);
         return 2;
     }
-    if (cudaMemcpy(mat3, matC, m*n*sizeof(float), cudaMemcpyHostToDevice) != cudaSuccess) {
-        cudaFree(mat1);
-        cudaFree(mat2);
-        cudaFree(mat3);
-        return 2;
+    if (beta != 0) {
+        if (cudaMemcpy(mat3, matC, m*n*sizeof(float), cudaMemcpyHostToDevice) != cudaSuccess) {
+            cudaFree(mat1);
+            cudaFree(mat2);
+            cudaFree(mat3);
+            return 2;
+        }
     }
     cublasOperation_t trans1, trans2;
     int ld1, ld2;
